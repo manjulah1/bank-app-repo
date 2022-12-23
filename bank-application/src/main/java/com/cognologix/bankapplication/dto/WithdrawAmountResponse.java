@@ -1,19 +1,28 @@
 package com.cognologix.bankapplication.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 @Data
-public class WithdrawAmountResponse {
+@AllArgsConstructor
+@NoArgsConstructor
+public class WithdrawAmountResponse extends BaseResponse {
 
     private Long accountNumber;
 
-    private LocalDate withdrawalDate;
+    private String withdrawalDate;
 
     private Double accountBalance;
 
-    private String message = "Amount withdrawal failed.";
+    public WithdrawAmountResponse(String message, Boolean isSuccess, Long accountNumber, String withdrawalDate, Double accountBalance) {
+        super(message, isSuccess);
+        this.accountNumber = accountNumber;
+        this.withdrawalDate = withdrawalDate;
+        this.accountBalance = accountBalance;
+    }
 }

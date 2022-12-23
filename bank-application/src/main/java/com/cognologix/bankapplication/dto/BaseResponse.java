@@ -9,10 +9,7 @@ import org.springframework.stereotype.Component;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AmountRequest {
-
-    private Long accountNumber;
-
-    private Double transactionAmount;
-
+public class BaseResponse {
+    private String message;
+    private Boolean isSuccess = false;
 }

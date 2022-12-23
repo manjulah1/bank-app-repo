@@ -1,14 +1,17 @@
 package com.cognologix.bankapplication.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
-@Setter
-@Getter
-public class BankAccountCreationResponse {
+@EqualsAndHashCode(callSuper = true)
+@Data
+@NoArgsConstructor
+public class BankAccountCreationResponse extends BaseResponse {
     private Long generatedAccountNumber;
-    private Boolean success = false;
-    private String message = "Bank account creation failed.";
+
+    public BankAccountCreationResponse(Long generatedAccountNumber, String message, Boolean isSuccess) {
+        super(message, isSuccess);
+        this.generatedAccountNumber = generatedAccountNumber;
+    }
 }

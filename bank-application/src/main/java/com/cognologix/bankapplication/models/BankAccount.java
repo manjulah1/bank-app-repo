@@ -1,60 +1,59 @@
 package com.cognologix.bankapplication.models;
 
-import com.sun.istack.NotNull;
-import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Proxy;
+import lombok.Data;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
-import javax.persistence.*;
-import java.io.File;
-import java.io.Serializable;
-import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class BankAccount implements Serializable {
-
+public class BankAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer bank_id;
-
-    @Column(nullable = false,updatable = false)
     private Long accountNumber;
 
+    @Column(nullable = false)
+    @NotBlank(message = "Account holder name cannot be null.")
     private String accountHolderName;
 
-    private LocalDate accountCreationDate;
+    @Column(nullable = false)
+    private String accountCreationDate;
 
+    @Column(nullable = false)
+    @NotBlank(message = "Account type cannot be null.")
     private String accountType;
 
     private String accountCurrency = "INR";
 
-    private String branchName;
+    @Column(nullable = false)
+    @NotBlank(message = "Branch code cannot be null.")
+    private String branchCode;
 
-//    private String branchCity;
-//
-//    private String branchState;
-//
-//    private String branchCountry;
-//
-//    private String branchPincode;
-
-    private String ifscCode;
-
+    @Column(nullable = false)
     private Double accountBalance;
 
+    @Column(nullable = false)
     private Integer customerId;
 
     private String accountStatus = "ACTIVE";
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "bank_user_id")
-//    private User;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "bank_user_id")
+    private User user;
 
-//    private String aadharCardDocPath;
-
-//    private String panCardDocPath;
 }

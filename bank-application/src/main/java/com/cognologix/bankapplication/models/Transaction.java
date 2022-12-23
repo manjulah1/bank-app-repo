@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -15,36 +18,38 @@ import java.time.LocalDate;
 public class Transaction {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, updatable = false)
     private String transactionId;
 
     private Double transactionAmount;
 
-    private LocalDate transactionDate;
+    private String transactionDate;
 
-    private String fromAccountNumber;
+    private Long fromAccountNumber;
 
-    private String fromAccountHolderName;
+    private Long toAccountNumber;
 
-    private String fromAccountType;
+    private Double balanceAfterWithdrawal;
 
-    private String fromIfscCode;
+    private Double balanceAfterDeposition;
 
-    private String toAccountNumber;
+    public Transaction(String transactionId, Double transactionAmount, String transactionDate, Long toAccountNumber, Double balanceAfterDeposition) {
+        this.transactionId = transactionId;
+        this.transactionAmount = transactionAmount;
+        this.transactionDate = transactionDate;
+        this.toAccountNumber = toAccountNumber;
+        this.balanceAfterDeposition = balanceAfterDeposition;
+    }
 
-    private String toAccountHolderName;
-
-    private String branchName;
-
-    private String branchCity;
-
-    private String branchState;
-
-    private String branchCountry;
-
-    private String branchPincode;
-
+    public Transaction(String transactionId, Double transactionAmount, String now, Long fromAccountNumber, Long toAccountNumber, Double balanceAfterWithdrawal, Double balanceAfterDeposition) {
+        this.transactionId = transactionId;
+        this.transactionAmount = transactionAmount;
+        this.transactionDate = now;
+        this.fromAccountNumber = fromAccountNumber;
+        this.toAccountNumber = toAccountNumber;
+        this.balanceAfterWithdrawal = balanceAfterWithdrawal;
+        this.balanceAfterDeposition = balanceAfterDeposition;
+    }
 }

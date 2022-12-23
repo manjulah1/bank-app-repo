@@ -1,5 +1,6 @@
 package com.cognologix.bankapplication.dto;
 
+import com.cognologix.bankapplication.models.User;
 import lombok.*;
 
 @Data
@@ -8,7 +9,7 @@ import lombok.*;
 @Builder
 @EqualsAndHashCode
 public class UserAccountCreationResponse {
-    private Integer customer_id;
+    private Integer customerId;
     private String successMessage;
-    private String additionalInformation;
+    private User additionalInformation;
 }

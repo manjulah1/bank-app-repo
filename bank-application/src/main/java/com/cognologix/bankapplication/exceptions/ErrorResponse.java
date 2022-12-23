@@ -1,18 +1,16 @@
-package com.cognologix.bankapplication.dto;
+package com.cognologix.bankapplication.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
 @Data
+@Component
 @AllArgsConstructor
 @NoArgsConstructor
-public class AmountRequest {
+public class ErrorResponse {
+    Integer statusCode;
 
-    private Long accountNumber;
-
-    private Double transactionAmount;
-
+    String message;
 }
